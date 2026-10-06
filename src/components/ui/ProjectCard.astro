@@ -1,0 +1,133 @@
+---
+import { ArrowUpRight, Check, Sparkles } from "@lucide/astro";
+import ImageSlot from "./ImageSlot.astro";
+import type { Project } from "../../data/projects";
+import { useTranslations, type Locale } from "../../i18n/utils";
+
+interface Props {
+  project: Project;
+  lang: Locale;
+}
+
+const { project, lang } = Astro.props;
+const t = useTranslations(lang);
+const copy = t.projects.items[project.id];
+const featured = project.featured ?? false;
+const tagline = "tagline" in copy ? copy.tagline : undefined;
+const highlights = "highlights" in copy ? copy.highlights : [];
+
+const links = [
+  project.playStoreUrl && {
+    href: project.playStoreUrl,
+    label: t.projects.getOnPlay,
+  },
+  project.url && { href: project.url, label: t.projects.visitSite },
+].filter((l): l is { href: string; label: string } => Boolean(l));
+---
+
+<article
+  class:list={[
+    "reveal group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors duration-300 hover:border-accent/50",
+    featured && "md:col-span-2 md:grid md:grid-cols-2 lg:row-span-2",
+  ]}
+>
+  <ImageSlot
+    variant="project"
+    image={project.image}
+    alt={copy.title}
+    platform={project.platforms[0]}
+    sizes={featured
+      ? "(min-width: 768px) 50vw, 100vw"
+      : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"}
+    class:list={[
+      "aspect-video border-b border-border",
+      featured && "md:aspect-auto md:min-h-full md:border-r md:border-b-0",
+    ]}
+  />
+
+  <div class:list={["flex flex-1 flex-col p-6", featured && "md:p-8"]}>
+    <div class="mb-4 flex flex-wrap items-center gap-2 font-mono text-xs">
+      {
+        featured && (
+          <span class="inline-flex items-center gap-1 rounded-full bg-accent-strong px-2.5 py-1 text-fg">
+            <Sparkles size={12} />
+            {t.projects.featured}
+          </span>
+        )
+      }
+      {
+        project.platforms.map((p) => (
+          <span class="rounded-full border border-border px-2.5 py-1 text-muted">
+            {t.projects.platforms[p]}
+          </span>
+        ))
+      }
+      {
+        project.upcomingPlatforms?.map((p) => (
+          <span class="rounded-full border border-dashed border-border px-2.5 py-1 text-muted">
+            {t.projects.platforms[p]} · {t.projects.comingSoon}
+          </span>
+        ))
+      }
+    </div>
+
+    <h3
+      class:list={[
+        "font-semibold tracking-tight",
+        featured ? "text-2xl sm:text-3xl" : "text-xl",
+      ]}
+    >
+      {copy.title}
+    </h3>
+    {
+      tagline && (
+        <p class="mt-1 font-mono text-sm text-accent-soft">{tagline}</p>
+      )
+    }
+    <p class="mt-3 text-pretty text-muted">{copy.description}</p>
+
+    {
+      highlights.length > 0 && (
+        <ul class="mt-5 space-y-2 text-sm">
+          {highlights.map((h) => (
+            <li class="flex items-start gap-2">
+              <Check size={16} class="mt-0.5 shrink-0 text-accent" />
+              <span>{h}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      project.tags && project.tags.length > 0 && (
+        <ul class="mt-5 flex flex-wrap gap-1.5 font-mono text-xs text-muted">
+          {project.tags.map((tag) => (
+            <li class="rounded bg-surface-2 px-2 py-0.5">{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      links.length > 0 && (
+        <div class="mt-auto flex flex-wrap gap-4 pt-6 text-sm font-medium">
+          {links.map((link) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 text-fg underline-offset-4 transition-colors hover:text-accent-soft hover:underline"
+            >
+              {link.label}
+              <span class="sr-only">
+                ({copy.title}, {t.a11y.newTab})
+              </span>
+              <ArrowUpRight size={16} />
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</article>

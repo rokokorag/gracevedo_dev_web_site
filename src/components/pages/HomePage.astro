@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layout/BaseLayout.astro";
+import Footer from "../layout/Footer.astro";
+import Navbar from "../layout/Navbar.astro";
+import About from "../sections/About.astro";
+import Contact from "../sections/Contact.astro";
+import Experience from "../sections/Experience.astro";
+import Hero from "../sections/Hero.astro";
+import Photography from "../sections/Photography.astro";
+import Projects from "../sections/Projects.astro";
+import Stack from "../sections/Stack.astro";
+import Stats from "../sections/Stats.astro";
+import type { Locale } from "../../i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<BaseLayout lang={lang}>
+  <Navbar slot="header" lang={lang} />
+  <Hero lang={lang} />
+  <Stats lang={lang} />
+  <About lang={lang} />
+  <Experience lang={lang} />
+  <Stack lang={lang} />
+  <Projects lang={lang} />
+  <Photography lang={lang} />
+  <Contact lang={lang} />
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

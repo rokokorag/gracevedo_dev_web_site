@@ -1,0 +1,35 @@
+---
+import ProjectCard from "../ui/ProjectCard.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import { projects } from "../../data/projects";
+import { useTranslations, type Locale } from "../../i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Featured projects always lead.
+const ordered = [...projects].sort(
+  (a, b) => Number(b.featured ?? false) - Number(a.featured ?? false),
+);
+---
+
+<section
+  id="projects"
+  aria-labelledby="projects-title"
+  class="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32"
+>
+  <SectionHeading
+    id="projects-title"
+    eyebrow={t.projects.eyebrow}
+    title={t.projects.title}
+    intro={t.projects.intro}
+  />
+
+  <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {ordered.map((project) => <ProjectCard project={project} lang={lang} />)}
+  </div>
+</section>

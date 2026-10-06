@@ -1,0 +1,35 @@
+---
+import { site } from "../../data/site";
+import { useTranslations, type Locale } from "../../i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6"
+  >
+    <p>© {year} {site.name}. {t.footer.rights}</p>
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+      <a href={`mailto:${site.email}`} class="transition-colors hover:text-fg"
+        >{site.email}</a
+      >
+      <a
+        href={site.photographyUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="transition-colors hover:text-fg"
+      >
+        {t.photography.eyebrow}
+        <span class="sr-only">({t.a11y.newTab})</span>
+      </a>
+      <span class="font-mono text-xs">{t.footer.builtWith}</span>
+    </div>
+  </div>
+</footer>

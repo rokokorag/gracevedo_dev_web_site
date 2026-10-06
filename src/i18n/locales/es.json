@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "title": "Rodrigo Acevedo | Senior Software Engineer",
+    "description": "Senior Software Engineer con más de 12 años creando productos móviles y web en fintech. Flujos transaccionales, automatización CI/CD y liderazgo técnico.",
+    "ogLocale": "es_MX"
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido",
+    "primaryNav": "Navegación principal",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "language": "Idioma",
+    "newTab": "se abre en una pestaña nueva",
+    "home": "Inicio"
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "stack": "Stack",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "eyebrow": "Senior Software Engineer · Mobile & Web",
+    "headline": "Construyo los flujos que mueven dinero real.",
+    "tagline": "Más de 12 años diseñando y lanzando productos móviles y web para fintech: arquitectura transaccional, automatización CI/CD y equipos que entregan.",
+    "ctaContact": "Hablemos",
+    "ctaProjects": "Ver proyectos",
+    "ctaCv": "Descargar CV",
+    "location": "Ciudad de México · Remoto"
+  },
+  "stats": {
+    "label": "Destacados",
+    "items": {
+      "years": "años creando software",
+      "deposits": "en depósitos de inversión tras el flujo SPEI que construí en Vest",
+      "team": "ingenieros liderados como Team Coach"
+    }
+  },
+  "about": {
+    "eyebrow": "Sobre mí",
+    "title": "Ingeniero de oficio, fotógrafo de mirada.",
+    "paragraphs": [
+      "Soy Senior Software Engineer en la Ciudad de México. Por más de una década he creado productos web, de escritorio y móviles, y en los últimos años me he enfocado en fintech: cambio de divisas, transferencias SPEI, tarjetas de débito y verificación de identidad.",
+      "Pasé años como Tech Lead y Team Coach, así que me importa tanto cómo trabaja un equipo como el código que entrega: estándares claros, revisiones honestas y pipelines que hacen que lanzar sea aburrido.",
+      "Lejos del teclado soy fotógrafo. Esa costumbre de observar la luz y la composición influye en cómo construyo interfaces."
+    ],
+    "interestsLabel": "También me gusta",
+    "interests": "Fotografía, cine, astronomía, correr y literatura.",
+    "languagesLabel": "Idiomas",
+    "languages": "Español (nativo) · Inglés (B2)",
+    "portraitAlt": "Retrato de Rodrigo Acevedo"
+  },
+  "experience": {
+    "eyebrow": "Experiencia",
+    "title": "Dónde he estado construyendo.",
+    "companies": {
+      "uexchange": {
+        "location": "Ciudad de México · Remoto"
+      },
+      "vest": {
+        "location": "Ciudad de México y Brasil · Remoto"
+      },
+      "nuxiba": {
+        "location": "Ciudad de México · Presencial y remoto"
+      }
+    },
+    "roles": {
+      "uexchange-senior-mobile": {
+        "title": "Senior Mobile Engineer",
+        "highlights": [
+          "Construí de punta a punta el flujo de compra/venta de divisas, con sincronización de monederos multimoneda y actualización de cotizaciones en ventanas de tiempo críticas.",
+          "Creé un control de umbral de tipo de cambio con selector interactivo e indicadores de tiempo estimado de ejecución que evitan errores antes de confirmar la orden.",
+          "Desarrollé el módulo de depósitos y retiros interbancarios (SPEI) con manejo de estado reactivo y paginación sincronizada con el servidor.",
+          "Construí el alta y ciclo de vida de tarjetas de débito sobre Galileo Financial, con controles en tiempo real para pausar, reanudar y cancelar.",
+          "Integré el SDK de Truora para KYC, prellenando domicilio, RFC y fechas desde la identificación y agilizando la firma de contratos."
+        ]
+      },
+      "vest-senior-software": {
+        "title": "Senior Software Engineer · Mobile & Web",
+        "highlights": [
+          "Desarrollé el módulo de depósitos y retiros SPEI, logrando un aumento del 70% en depósitos de inversión en México.",
+          "Integré Smartlook, Customer.io y Adjust, dando a los equipos de negocio datos de atribución y comportamiento para mejorar la retención.",
+          "Lideré funcionalidades clave: alta de tarjetas de débito con un emisor externo, dashboards de Stock Lending, visualización de transacciones e inicio de sesión con Google/Apple.",
+          "Construí desde cero el sitio corporativo: optimizado para SEO, trilingüe (ES/EN/PT) sobre un CMS y con un chat de IA sobre WebSockets.",
+          "Diseñé y mantuve el CI/CD móvil y web, incluyendo la firma automática de apps para acortar los tiempos de lanzamiento."
+        ]
+      },
+      "nuxiba-tech-lead": {
+        "title": "Tech Lead",
+        "highlights": [
+          "Dirigí al equipo de ingeniería en la ejecución del roadmap de producto, alineando las entregas con los objetivos de negocio.",
+          "Establecí estándares de calidad de código y gobierno técnico, liderando decisiones de arquitectura y revisiones.",
+          "Diseñé la estrategia de CI/CD que redujo errores en producción y aceleró los lanzamientos."
+        ]
+      },
+      "nuxiba-team-coach": {
+        "title": "Team Coach",
+        "highlights": [
+          "Lideré y acompañé a un equipo de 5 ingenieros con prácticas ágiles, aumentando el compromiso y la visibilidad de los proyectos."
+        ]
+      },
+      "nuxiba-developer": {
+        "title": "Software Developer → Senior Software Engineer",
+        "highlights": [
+          "Desarrollo full-stack de soluciones web y de escritorio con comunicación en tiempo real (sockets/WebSockets), VoIP, reconocimiento de voz y texto a voz."
+        ]
+      }
+    }
+  },
+  "stack": {
+    "eyebrow": "Stack",
+    "title": "Las herramientas que uso.",
+    "intro": "Desde mobile nativo hasta la nube, más los pipelines que lo llevan a producción.",
+    "categories": {
+      "languages": "Lenguajes",
+      "mobile": "Mobile",
+      "web": "Web",
+      "backend": "Backend y datos",
+      "devops": "DevOps y nube"
+    }
+  },
+  "projects": {
+    "eyebrow": "Proyectos",
+    "title": "Freelance y side projects.",
+    "intro": "Cosas que he construido para clientes y para mí.",
+    "featured": "Destacado",
+    "comingSoon": "próximamente",
+    "visitSite": "Visitar sitio",
+    "getOnPlay": "Google Play",
+    "platforms": {
+      "web": "Sitio web",
+      "android": "App Android",
+      "ios": "App iOS"
+    },
+    "items": {
+      "slabs": {
+        "title": "Slabs: Sliding Puzzle",
+        "tagline": "Desliza. Ordena. Domina el tiempo.",
+        "description": "Una versión neo-brutalista del clásico rompecabezas de 15, con tableros de 3×3, 4×4 y 5×5, cronómetro con precisión de centésimas y marcadores locales.",
+        "highlights": [
+          "Paleta apta para daltonismo (Okabe–Ito)",
+          "Soporte completo para lector de pantalla",
+          "Funciona sin conexión, sin anuncios"
+        ]
+      },
+      "smiletoo": {
+        "title": "Smile Too",
+        "description": "Sitio web de una clínica dental en la Ciudad de México que presenta sus ocho especialidades, de la ortodoncia a la implantología."
+      },
+      "raiz-intelligence-lab": {
+        "title": "Raíz Intelligence Lab",
+        "description": "Sitio web de una consultora de investigación que ayuda a las organizaciones a entender el comportamiento humano y la cultura."
+      },
+      "rehabsportmed": {
+        "title": "RehabSport",
+        "description": "Sitio web de una práctica de ortopedia y traumatología deportiva, con sus dos clínicas y consultas por telemedicina."
+      },
+      "ip-subnetting": {
+        "title": "IP Subnetting",
+        "description": "App Android para calcular y practicar subneteo IPv4."
+      },
+      "yoga-homeline": {
+        "title": "Yoga Homeline",
+        "description": "App iOS para practicar yoga en casa."
+      }
+    }
+  },
+  "photography": {
+    "eyebrow": "Fotografía",
+    "title": "La otra mitad de cómo veo.",
+    "text": "Cuando no estoy escribiendo código, estoy detrás de una cámara. Mi portfolio de fotografía vive en su propio sitio.",
+    "cta": "Ver portfolio de fotografía",
+    "photoAlt": "Fotografía de Rodrigo Acevedo"
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "title": "Construyamos algo.",
+    "text": "Abierto a roles senior de ingeniería, proyectos freelance y buenas conversaciones. La forma más rápida de contactarme es por correo.",
+    "emailLabel": "Escríbeme",
+    "elsewhere": "En otros sitios"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "builtWith": "Hecho con Astro y Tailwind CSS."
+  }
+}

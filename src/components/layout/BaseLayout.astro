@@ -1,0 +1,81 @@
+---
+import { Font } from "astro:assets";
+import "../../styles/global.css";
+import {
+  absoluteLocaleUrl,
+  defaultLocale,
+  locales,
+  useTranslations,
+  type Locale,
+} from "../../i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const canonical = absoluteLocaleUrl(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0a0a0b" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <link rel="canonical" href={canonical} />
+    {
+      locales.map((l) => (
+        <link rel="alternate" hreflang={l} href={absoluteLocaleUrl(l)} />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={absoluteLocaleUrl(defaultLocale)}
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="gracevedo.dev" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={t.meta.ogLocale} />
+    {
+      locales
+        .filter((l) => l !== lang)
+        .map((l) => (
+          <meta
+            property="og:locale:alternate"
+            content={useTranslations(l).meta.ogLocale}
+          />
+        ))
+    }
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={t.meta.title} />
+    <meta name="twitter:description" content={t.meta.description} />
+
+    <Font cssVariable="--font-geist" preload />
+    <Font cssVariable="--font-geist-mono" />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:rounded-md focus:bg-accent-strong focus:px-4 focus:py-2 focus:font-medium focus:text-fg"
+    >
+      {t.a11y.skipToContent}
+    </a>
+    <slot name="header" />
+    <main id="main" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>

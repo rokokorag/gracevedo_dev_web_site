@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "title": "Rodrigo Acevedo | Senior Software Engineer",
+    "description": "Senior Software Engineer with 12+ years building mobile and web products in fintech. Transactional flows, CI/CD automation and technical leadership.",
+    "ogLocale": "en_US"
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "primaryNav": "Primary navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "newTab": "opens in a new tab",
+    "home": "Home"
+  },
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "stack": "Stack",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "eyebrow": "Senior Software Engineer · Mobile & Web",
+    "headline": "I build the flows that move real money.",
+    "tagline": "12+ years designing and shipping mobile and web products for fintech: transactional architecture, CI/CD automation and teams that deliver.",
+    "ctaContact": "Let's talk",
+    "ctaProjects": "See projects",
+    "ctaCv": "Download CV",
+    "location": "Mexico City · Remote"
+  },
+  "stats": {
+    "label": "Highlights",
+    "items": {
+      "years": "years building software",
+      "deposits": "investment deposits after the SPEI flow I built at Vest",
+      "team": "engineers led and coached as Team Coach"
+    }
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "Engineer by trade, photographer by eye.",
+    "paragraphs": [
+      "I'm a Senior Software Engineer based in Mexico City. For more than a decade I've built web, desktop and mobile products, and lately I've focused on fintech: currency exchange, SPEI transfers, debit cards and identity verification.",
+      "I spent years as Tech Lead and Team Coach, so I care as much about how a team works as about the code it ships: clear standards, honest reviews and pipelines that make releasing boring.",
+      "Away from the keyboard I'm a photographer. That habit of looking closely at light and composition shapes how I build interfaces."
+    ],
+    "interestsLabel": "Also into",
+    "interests": "Photography, film, astronomy, running and literature.",
+    "languagesLabel": "Languages",
+    "languages": "Spanish (native) · English (B2)",
+    "portraitAlt": "Portrait of Rodrigo Acevedo"
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "title": "Where I've been building.",
+    "companies": {
+      "uexchange": {
+        "location": "Mexico City · Remote"
+      },
+      "vest": {
+        "location": "Mexico City & Brazil · Remote"
+      },
+      "nuxiba": {
+        "location": "Mexico City · On-site & Remote"
+      }
+    },
+    "roles": {
+      "uexchange-senior-mobile": {
+        "title": "Senior Mobile Engineer",
+        "highlights": [
+          "Built the end-to-end currency exchange (buy/sell) flow with multi-currency wallet sync and quote-rate updates under time-critical windows.",
+          "Created an exchange-rate threshold control with an interactive selector and estimated-execution-time indicators that prevent input errors before confirmation.",
+          "Developed the interbank deposits and withdrawals module (SPEI) with reactive state management and server-synced pagination.",
+          "Built debit card onboarding and lifecycle on Galileo Financial, with real-time pause, resume and cancel controls.",
+          "Integrated the Truora SDK for KYC, auto-filling address, tax ID and dates from scanned IDs and streamlining contract signing."
+        ]
+      },
+      "vest-senior-software": {
+        "title": "Senior Software Engineer · Mobile & Web",
+        "highlights": [
+          "Developed the SPEI deposits and withdrawals module, driving a 70% increase in investment deposits in Mexico.",
+          "Integrated Smartlook, Customer.io and Adjust, giving business teams attribution and behavior data to improve retention.",
+          "Led core features: debit card onboarding with an external issuer, Stock Lending dashboards, transaction views and Google/Apple sign-in.",
+          "Built the corporate website from scratch: SEO-first, trilingual (ES/EN/PT) on a CMS, with a WebSocket-powered AI chat.",
+          "Designed and maintained mobile and web CI/CD, including automatic app signing to shorten release times."
+        ]
+      },
+      "nuxiba-tech-lead": {
+        "title": "Tech Lead",
+        "highlights": [
+          "Directed the engineering team through the product roadmap, aligning delivery with business goals.",
+          "Set code quality standards and technical governance, leading architecture decisions and reviews.",
+          "Designed the CI/CD strategy that reduced production errors and sped up releases."
+        ]
+      },
+      "nuxiba-team-coach": {
+        "title": "Team Coach",
+        "highlights": [
+          "Led and coached a team of 5 engineers with agile practices, raising engagement and project visibility."
+        ]
+      },
+      "nuxiba-developer": {
+        "title": "Software Developer → Senior Software Engineer",
+        "highlights": [
+          "Full-stack development of web and desktop solutions with real-time communication (sockets/WebSockets), VoIP, speech recognition and text-to-speech."
+        ]
+      }
+    }
+  },
+  "stack": {
+    "eyebrow": "Stack",
+    "title": "Tools I reach for.",
+    "intro": "From native mobile to the cloud, plus the pipelines that ship it.",
+    "categories": {
+      "languages": "Languages",
+      "mobile": "Mobile",
+      "web": "Web",
+      "backend": "Backend & Data",
+      "devops": "DevOps & Cloud"
+    }
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "title": "Freelance & side projects.",
+    "intro": "Things I've built for clients and for myself.",
+    "featured": "Featured",
+    "comingSoon": "coming soon",
+    "visitSite": "Visit site",
+    "getOnPlay": "Google Play",
+    "platforms": {
+      "web": "Website",
+      "android": "Android app",
+      "ios": "iOS app"
+    },
+    "items": {
+      "slabs": {
+        "title": "Slabs: Sliding Puzzle",
+        "tagline": "Slide. Order. Master Time.",
+        "description": "A neo-brutalist take on the classic 15-puzzle, with 3×3, 4×4 and 5×5 boards, a hundredths-precision timer and local leaderboards.",
+        "highlights": [
+          "Color-blind friendly palette (Okabe–Ito)",
+          "Full screen reader support",
+          "Offline-first, no ads"
+        ]
+      },
+      "smiletoo": {
+        "title": "Smile Too",
+        "description": "Website for a dental clinic in Mexico City, showcasing its eight specialties, from orthodontics to implantology."
+      },
+      "raiz-intelligence-lab": {
+        "title": "Raíz Intelligence Lab",
+        "description": "Website for a research consultancy that helps organizations understand human behavior and culture."
+      },
+      "rehabsportmed": {
+        "title": "RehabSport",
+        "description": "Website for a sports orthopedics and traumatology practice, covering its two clinics and telemedicine consultations."
+      },
+      "ip-subnetting": {
+        "title": "IP Subnetting",
+        "description": "Android app for calculating and practicing IPv4 subnetting."
+      },
+      "yoga-homeline": {
+        "title": "Yoga Homeline",
+        "description": "iOS app for practicing yoga at home."
+      }
+    }
+  },
+  "photography": {
+    "eyebrow": "Photography",
+    "title": "The other half of how I see.",
+    "text": "When I'm not writing code, I'm behind a camera. My photography portfolio lives on its own site.",
+    "cta": "View photography portfolio",
+    "photoAlt": "Photograph by Rodrigo Acevedo"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's build something.",
+    "text": "Open to senior engineering roles, freelance projects and good conversations. The fastest way to reach me is email.",
+    "emailLabel": "Email me",
+    "elsewhere": "Elsewhere"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Built with Astro & Tailwind CSS."
+  }
+}

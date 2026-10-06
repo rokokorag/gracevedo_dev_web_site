@@ -1,0 +1,115 @@
+---
+import { Menu, X } from "@lucide/astro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { site } from "../../data/site";
+import { localeUrl, useTranslations, type Locale } from "../../i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const links = [
+  { href: "#about", label: t.nav.about },
+  { href: "#experience", label: t.nav.experience },
+  { href: "#stack", label: t.nav.stack },
+  { href: "#projects", label: t.nav.projects },
+  { href: "#contact", label: t.nav.contact },
+];
+---
+
+<header
+  class="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-bg/75 backdrop-blur-md"
+>
+  <nav
+    aria-label={t.a11y.primaryNav}
+    class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6"
+  >
+    <a
+      href={localeUrl(lang)}
+      class="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight"
+    >
+      <span
+        aria-hidden="true"
+        class="grid size-7 place-items-center rounded-md bg-accent-strong text-[11px] text-fg"
+      >
+        {site.monogram}
+      </span>
+      <span>gracevedo<span class="text-accent">.dev</span></span>
+      <span class="sr-only">— {t.a11y.home}</span>
+    </a>
+
+    <ul class="hidden items-center gap-1 text-sm md:flex">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="rounded-md px-3 py-2 text-muted transition-colors hover:text-fg"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <LanguageSwitcher lang={lang} />
+      <button
+        type="button"
+        popovertarget="mobile-menu"
+        class="grid size-9 place-items-center rounded-md border border-border text-fg md:hidden"
+      >
+        <Menu size={18} />
+        <span class="sr-only">{t.a11y.openMenu}</span>
+      </button>
+    </div>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    popover
+    class="inset-x-0 top-0 m-0 h-dvh w-full max-w-none border-0 bg-bg/95 p-0 text-fg backdrop-blur-md md:hidden"
+  >
+    <div class="flex h-16 items-center justify-end px-4">
+      <button
+        type="button"
+        popovertarget="mobile-menu"
+        popovertargetaction="hide"
+        class="grid size-9 place-items-center rounded-md border border-border"
+      >
+        <X size={18} />
+        <span class="sr-only">{t.a11y.closeMenu}</span>
+      </button>
+    </div>
+    <ul class="flex flex-col gap-1 px-6 pt-4 text-2xl font-medium">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              data-menu-link
+              class="block border-b border-border py-4 transition-colors hover:text-accent-soft"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<script is:inline>
+  // Progressive enhancement: close the mobile menu after choosing a section.
+  document
+    .querySelectorAll("[data-menu-link]")
+    .forEach((link) =>
+      link.addEventListener("click", () =>
+        document.getElementById("mobile-menu")?.hidePopover(),
+      ),
+    );
+</script>
