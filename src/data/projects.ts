@@ -25,13 +25,14 @@ export const projects: Project[] = [
     url: "https://slabs.gracevedo.dev/",
     playStoreUrl:
       "https://play.google.com/store/apps/details?id=dev.gracevedo.slabs",
+    tags: ["Flutter", "BLoC"],
     featured: true,
   },
-  { id: "smiletoo", platforms: ["web"], url: "https://smiletoo.mx/" },
+  { id: "smiletoo", platforms: ["web"], url: "https://www.smiletoo.mx/" },
   {
     id: "raiz-intelligence-lab",
     platforms: ["web"],
-    url: "https://raizintelligencelab.com/",
+    url: "https://www.raizintelligencelab.com/",
   },
   {
     id: "rehabsportmed",

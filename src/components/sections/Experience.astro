@@ -1,6 +1,7 @@
 ---
 import SectionHeading from "../ui/SectionHeading.astro";
 import { experience } from "../../data/experience";
+import { projects } from "../../data/projects";
 import {
   formatMonthYear,
   useTranslations,
@@ -13,6 +14,15 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+// Highlights may link to a project with `[label](project-id)`; the URL comes from src/data/projects.ts.
+function parseHighlight(text: string) {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/).map((part) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    const href = match && projects.find((p) => p.id === match[2])?.url;
+    return href ? { label: match[1], href } : { text: match?.[1] ?? part };
+  });
+}
 ---
 
 <section
@@ -28,63 +38,86 @@ const t = useTranslations(lang);
 
   <ol class="relative space-y-14 border-l border-border pl-8 sm:pl-12">
     {
-      experience.map((company) => (
-        <li class="reveal relative">
-          <span
-            aria-hidden="true"
-            class="absolute top-1.5 -left-[calc(2rem+5px)] size-2.5 rounded-full bg-accent ring-4 ring-bg sm:-left-[calc(3rem+5px)]"
-          />
-          <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-            <h3 class="text-2xl font-semibold tracking-tight">
-              {company.name}
-            </h3>
-            <p class="font-mono text-sm text-muted">
-              <time datetime={company.start}>
-                {formatMonthYear(company.start, lang)}
-              </time>
-              {" – "}
-              <time datetime={company.end}>
-                {formatMonthYear(company.end, lang)}
-              </time>
-            </p>
-          </div>
-          <p class="mt-1 text-sm text-muted">
-            {t.experience.companies[company.id].location}
-          </p>
+      experience.map((company) => {
+        const companyCopy = t.experience.companies[company.id];
+        const name =
+          company.name ?? ("name" in companyCopy ? companyCopy.name : "");
+        return (
+          <li class="reveal relative">
+            <span
+              aria-hidden="true"
+              class="absolute top-1.5 -left-[calc(2rem+5px)] size-2.5 rounded-full bg-accent ring-4 ring-bg sm:-left-[calc(3rem+5px)]"
+            />
+            <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+              <h3 class="text-2xl font-semibold tracking-tight">{name}</h3>
+              <p class="font-mono text-sm text-muted">
+                <time datetime={company.start}>
+                  {formatMonthYear(company.start, lang)}
+                </time>
+                {" – "}
+                {company.end ? (
+                  <time datetime={company.end}>
+                    {formatMonthYear(company.end, lang)}
+                  </time>
+                ) : (
+                  t.experience.present
+                )}
+              </p>
+            </div>
+            <p class="mt-1 text-sm text-muted">{companyCopy.location}</p>
 
-          <div class="mt-6 space-y-8">
-            {company.roles.map((role) => {
-              const copy = t.experience.roles[role.id];
-              return (
-                <div
-                  class:list={[
-                    company.roles.length > 1 &&
-                      "rounded-xl border border-border bg-surface/50 p-5 sm:p-6",
-                  ]}
-                >
-                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                    <h4 class="font-medium text-accent-soft">{copy.title}</h4>
-                    {role.period && (
-                      <p class="font-mono text-xs text-muted">{role.period}</p>
-                    )}
+            <div class="mt-6 space-y-8">
+              {company.roles.map((role) => {
+                const copy = t.experience.roles[role.id];
+                return (
+                  <div
+                    class:list={[
+                      company.roles.length > 1 &&
+                        "rounded-xl border border-border bg-surface/50 p-5 sm:p-6",
+                    ]}
+                  >
+                    <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                      <h4 class="font-medium text-accent-soft">{copy.title}</h4>
+                      {role.period && (
+                        <p class="font-mono text-xs text-muted">
+                          {role.period}
+                        </p>
+                      )}
+                    </div>
+                    <ul class="mt-3 space-y-2.5 text-muted">
+                      {copy.highlights.map((h) => (
+                        <li class="flex gap-3 text-pretty">
+                          <span
+                            aria-hidden="true"
+                            class="mt-2.5 h-px w-3 shrink-0 bg-accent/70"
+                          />
+                          <span>
+                            {parseHighlight(h).map((segment) =>
+                              "href" in segment ? (
+                                <a
+                                  href={segment.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  class="text-fg underline decoration-accent/50 underline-offset-4 transition-colors hover:decoration-accent"
+                                >
+                                  {segment.label}
+                                  <span class="sr-only">({t.a11y.newTab})</span>
+                                </a>
+                              ) : (
+                                segment.text
+                              ),
+                            )}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul class="mt-3 space-y-2.5 text-muted">
-                    {copy.highlights.map((h) => (
-                      <li class="flex gap-3 text-pretty">
-                        <span
-                          aria-hidden="true"
-                          class="mt-2.5 h-px w-3 shrink-0 bg-accent/70"
-                        />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-        </li>
-      ))
+                );
+              })}
+            </div>
+          </li>
+        );
+      })
     }
   </ol>
 </section>

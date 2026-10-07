@@ -11,15 +11,22 @@ export interface Role {
 
 export interface Company {
   id: CompanyId;
-  name: string;
+  // Omit to use the translated `experience.companies.<id>.name`.
+  name?: string;
   // "YYYY-MM"
   start: string;
-  end: string;
+  // Omit for an ongoing position ("Present").
+  end?: string;
   roles: Role[];
 }
 
 // Most recent first.
 export const experience: Company[] = [
+  {
+    id: "independent",
+    start: "2026-06",
+    roles: [{ id: "independent-engineer" }],
+  },
   {
     id: "uexchange",
     name: "Uexchange",

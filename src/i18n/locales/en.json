@@ -22,8 +22,8 @@
   },
   "hero": {
     "eyebrow": "Senior Software Engineer · Mobile & Web",
-    "headline": "I build the flows that move real money.",
-    "tagline": "12+ years designing and shipping mobile and web products for fintech: transactional architecture, CI/CD automation and teams that deliver.",
+    "headline": "I build software people use every day.",
+    "tagline": "12+ years creating mobile, web and desktop products, from idea to production. I've worked in fintech, real-time communications and client websites.",
     "ctaContact": "Let's talk",
     "ctaProjects": "See projects",
     "ctaCv": "Download CV",
@@ -39,11 +39,11 @@
   },
   "about": {
     "eyebrow": "About",
-    "title": "Engineer by trade, photographer by eye.",
+    "title": "Between code and camera.",
     "paragraphs": [
       "I'm a Senior Software Engineer based in Mexico City. For more than a decade I've built web, desktop and mobile products, and lately I've focused on fintech: currency exchange, SPEI transfers, debit cards and identity verification.",
-      "I spent years as Tech Lead and Team Coach, so I care as much about how a team works as about the code it ships: clear standards, honest reviews and pipelines that make releasing boring.",
-      "Away from the keyboard I'm a photographer. That habit of looking closely at light and composition shapes how I build interfaces."
+      "I've led and coached teams as Tech Lead and Team Coach. I care that code stays maintainable, that reviews add value and that every release reaches production without surprises.",
+      "When I'm not coding, I'm behind a camera. Photography taught me patience, how to frame what matters and how to cut what doesn't, and I apply the same thinking to software."
     ],
     "interestsLabel": "Also into",
     "interests": "Photography, film, astronomy, running and literature.",
@@ -54,7 +54,12 @@
   "experience": {
     "eyebrow": "Experience",
     "title": "Where I've been building.",
+    "present": "Present",
     "companies": {
+      "independent": {
+        "name": "Independent",
+        "location": "Mexico City · Remote"
+      },
       "uexchange": {
         "location": "Mexico City · Remote"
       },
@@ -66,6 +71,13 @@
       }
     },
     "roles": {
+      "independent-engineer": {
+        "title": "Independent Software Engineer",
+        "highlights": [
+          "Designed and built [Slabs: Sliding Puzzle](slabs) end to end with Flutter and a BLoC architecture. Launched on Google Play, with the App Store release coming soon.",
+          "Built websites for clients: [Smile Too](smiletoo) (dental clinic), [Raíz Intelligence Lab](raiz-intelligence-lab) (research consultancy) and [RehabSport](rehabsportmed) (sports medicine)."
+        ]
+      },
       "uexchange-senior-mobile": {
         "title": "Senior Mobile Engineer",
         "highlights": [
@@ -83,7 +95,7 @@
           "Integrated Smartlook, Customer.io and Adjust, giving business teams attribution and behavior data to improve retention.",
           "Led core features: debit card onboarding with an external issuer, Stock Lending dashboards, transaction views and Google/Apple sign-in.",
           "Built the corporate website from scratch: SEO-first, trilingual (ES/EN/PT) on a CMS, with a WebSocket-powered AI chat.",
-          "Designed and maintained mobile and web CI/CD, including automatic app signing to shorten release times."
+          "Maintained the mobile and web CI/CD pipelines, including automatic app signing, keeping releases fast and reliable."
         ]
       },
       "nuxiba-tech-lead": {

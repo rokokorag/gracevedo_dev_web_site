@@ -43,11 +43,23 @@ La sección About SHALL mostrar una biografía breve (fintech, liderazgo, fotogr
 - **THEN** se muestra esa imagen con un texto alternativo descriptivo
 
 ### Requirement: Línea de tiempo de experiencia
-La sección Experience SHALL listar, del más reciente al más antiguo, los puestos en Uexchange (Senior Mobile Engineer, ene 2026 - may 2026), Vest (Senior Software Engineer, Mobile & Web, mar 2024 - ene 2026) y Nuxiba Technologies (ago 2012 - feb 2024). Cada puesto MUST mostrar empresa, rol, periodo, modalidad/ubicación y sus logros clave.
+La sección Experience SHALL listar, del más reciente al más antiguo, el trabajo independiente (Independent Software Engineer, jun 2026 - presente), Uexchange (Senior Mobile Engineer, ene 2026 - may 2026), Vest (Senior Software Engineer, Mobile & Web, mar 2024 - ene 2026) y Nuxiba Technologies (ago 2012 - feb 2024). Cada puesto MUST mostrar empresa, rol, periodo, modalidad/ubicación y sus logros clave.
 
 #### Scenario: Orden cronológico inverso
 - **WHEN** el visitante revisa la sección Experience
-- **THEN** Uexchange aparece primero y Nuxiba Technologies al final
+- **THEN** la entrada independiente aparece primero y Nuxiba Technologies al final
+
+#### Scenario: Puesto en curso
+- **WHEN** un puesto no tiene fecha de fin
+- **THEN** su periodo termina en "Present" en inglés y "Presente" en español
+
+#### Scenario: Trabajo independiente
+- **WHEN** el visitante revisa la entrada independiente
+- **THEN** ve el nombre traducido ("Independent" / "Independiente") y los logros sobre Slabs y los sitios para clientes
+
+#### Scenario: Enlace a un proyecto desde un logro
+- **WHEN** un logro menciona un proyecto con URL pública (por ejemplo, Slabs: Sliding Puzzle)
+- **THEN** el nombre del proyecto es un enlace a su sitio que se abre en una pestaña nueva
 
 #### Scenario: Progresión de roles en Nuxiba
 - **WHEN** el visitante revisa la entrada de Nuxiba Technologies

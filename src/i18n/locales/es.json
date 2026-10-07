@@ -22,8 +22,8 @@
   },
   "hero": {
     "eyebrow": "Senior Software Engineer · Mobile & Web",
-    "headline": "Construyo los flujos que mueven dinero real.",
-    "tagline": "Más de 12 años diseñando y lanzando productos móviles y web para fintech: arquitectura transaccional, automatización CI/CD y equipos que entregan.",
+    "headline": "Construyo software que la gente usa todos los días.",
+    "tagline": "Más de 12 años creando productos móviles, web y de escritorio, de la idea a producción. He trabajado en fintech, comunicaciones en tiempo real y sitios para clientes.",
     "ctaContact": "Hablemos",
     "ctaProjects": "Ver proyectos",
     "ctaCv": "Descargar CV",
@@ -39,11 +39,11 @@
   },
   "about": {
     "eyebrow": "Sobre mí",
-    "title": "Ingeniero de oficio, fotógrafo de mirada.",
+    "title": "Entre el código y la cámara.",
     "paragraphs": [
       "Soy Senior Software Engineer en la Ciudad de México. Por más de una década he creado productos web, de escritorio y móviles, y en los últimos años me he enfocado en fintech: cambio de divisas, transferencias SPEI, tarjetas de débito y verificación de identidad.",
-      "Pasé años como Tech Lead y Team Coach, así que me importa tanto cómo trabaja un equipo como el código que entrega: estándares claros, revisiones honestas y pipelines que hacen que lanzar sea aburrido.",
-      "Lejos del teclado soy fotógrafo. Esa costumbre de observar la luz y la composición influye en cómo construyo interfaces."
+      "He liderado y acompañado equipos como Tech Lead y Team Coach. Me importa que el código sea mantenible, que las revisiones sumen y que cada lanzamiento llegue a producción sin sorpresas.",
+      "Cuando no estoy programando, estoy detrás de una cámara. Fotografiar me enseñó a tener paciencia, a encuadrar lo importante y a quitar lo que sobra, algo que aplico igual al diseñar software."
     ],
     "interestsLabel": "También me gusta",
     "interests": "Fotografía, cine, astronomía, correr y literatura.",
@@ -54,7 +54,12 @@
   "experience": {
     "eyebrow": "Experiencia",
     "title": "Dónde he estado construyendo.",
+    "present": "Presente",
     "companies": {
+      "independent": {
+        "name": "Independiente",
+        "location": "Ciudad de México · Remoto"
+      },
       "uexchange": {
         "location": "Ciudad de México · Remoto"
       },
@@ -66,6 +71,13 @@
       }
     },
     "roles": {
+      "independent-engineer": {
+        "title": "Independent Software Engineer",
+        "highlights": [
+          "Diseñé y construí [Slabs: Sliding Puzzle](slabs) de principio a fin con Flutter y arquitectura BLoC. Publicado en Google Play, con el lanzamiento en App Store muy pronto.",
+          "Construí sitios web para clientes: [Smile Too](smiletoo) (clínica dental), [Raíz Intelligence Lab](raiz-intelligence-lab) (consultora de investigación) y [RehabSport](rehabsportmed) (medicina deportiva)."
+        ]
+      },
       "uexchange-senior-mobile": {
         "title": "Senior Mobile Engineer",
         "highlights": [
@@ -83,7 +95,7 @@
           "Integré Smartlook, Customer.io y Adjust, dando a los equipos de negocio datos de atribución y comportamiento para mejorar la retención.",
           "Lideré funcionalidades clave: alta de tarjetas de débito con un emisor externo, dashboards de Stock Lending, visualización de transacciones e inicio de sesión con Google/Apple.",
           "Construí desde cero el sitio corporativo: optimizado para SEO, trilingüe (ES/EN/PT) sobre un CMS y con un chat de IA sobre WebSockets.",
-          "Diseñé y mantuve el CI/CD móvil y web, incluyendo la firma automática de apps para acortar los tiempos de lanzamiento."
+          "Mantuve los pipelines de CI/CD móvil y web, incluyendo la firma automática de apps, para que los lanzamientos fueran rápidos y confiables."
         ]
       },
       "nuxiba-tech-lead": {
