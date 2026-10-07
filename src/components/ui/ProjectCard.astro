@@ -1,6 +1,7 @@
 ---
-import { ArrowUpRight, Check, Sparkles } from "@lucide/astro";
+import { Archive, ArrowUpRight, Check, Sparkles } from "@lucide/astro";
 import ImageSlot from "./ImageSlot.astro";
+import PhoneFrame from "./PhoneFrame.astro";
 import type { Project } from "../../data/projects";
 import { useTranslations, type Locale } from "../../i18n/utils";
 
@@ -31,19 +32,40 @@ const links = [
     featured && "md:col-span-2 md:grid md:grid-cols-2 lg:row-span-2",
   ]}
 >
-  <ImageSlot
-    variant="project"
-    image={project.image}
-    alt={copy.title}
-    platform={project.platforms[0]}
-    sizes={featured
-      ? "(min-width: 768px) 50vw, 100vw"
-      : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"}
-    class:list={[
-      "aspect-video border-b border-border",
-      featured && "md:aspect-auto md:min-h-full md:border-r md:border-b-0",
-    ]}
-  />
+  {
+    project.screenshot ? (
+      <div
+        class:list={[
+          "relative border-b border-border",
+          featured
+            ? "h-[28rem] md:h-auto md:min-h-[32rem] md:border-r md:border-b-0"
+            : "aspect-video",
+        ]}
+      >
+        <PhoneFrame
+          screenshot={project.screenshot}
+          alt={`${t.projects.screenshotOf} ${copy.title}`}
+          featured={featured}
+        />
+      </div>
+    ) : (
+      <ImageSlot
+        variant="project"
+        image={project.image}
+        alt={copy.title}
+        platform={project.platforms[0]}
+        sizes={
+          featured
+            ? "(min-width: 768px) 50vw, 100vw"
+            : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+        }
+        class:list={[
+          "aspect-video border-b border-border",
+          featured && "md:aspect-auto md:min-h-full md:border-r md:border-b-0",
+        ]}
+      />
+    )
+  }
 
   <div class:list={["flex flex-1 flex-col p-6", featured && "md:p-8"]}>
     <div class="mb-4 flex flex-wrap items-center gap-2 font-mono text-xs">
@@ -52,6 +74,14 @@ const links = [
           <span class="inline-flex items-center gap-1 rounded-full bg-accent-strong px-2.5 py-1 text-fg">
             <Sparkles size={12} />
             {t.projects.featured}
+          </span>
+        )
+      }
+      {
+        project.legacy && (
+          <span class="inline-flex items-center gap-1 rounded-full bg-surface-2 px-2.5 py-1 text-muted">
+            <Archive size={12} />
+            {t.projects.legacy}
           </span>
         )
       }
@@ -85,6 +115,11 @@ const links = [
       )
     }
     <p class="mt-3 text-pretty text-muted">{copy.description}</p>
+    {
+      project.legacy && (
+        <p class="mt-2 text-sm text-muted/80 italic">{t.projects.legacyNote}</p>
+      )
+    }
 
     {
       highlights.length > 0 && (

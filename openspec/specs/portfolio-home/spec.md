@@ -87,6 +87,14 @@ La sección Projects SHALL mostrar Slabs: Sliding Puzzle como proyecto destacado
 - **WHEN** un proyecto no tiene URL pública
 - **THEN** la tarjeta se muestra sin enlace y sin un enlace roto o vacío
 
+#### Scenario: Proyecto legacy
+- **WHEN** un proyecto ya no está disponible en su tienda de apps (IP Subnetting, Yoga Homeline)
+- **THEN** su tarjeta muestra una insignia "Legacy" y una nota que indica que ya no está disponible en la tienda
+
+#### Scenario: Tecnologías del proyecto
+- **WHEN** un proyecto tiene tecnologías configuradas (por ejemplo, Java en IP Subnetting o Swift en Yoga Homeline)
+- **THEN** su tarjeta las muestra como etiquetas
+
 ### Requirement: Placeholder para imágenes de proyecto
 Cada tarjeta de proyecto SHALL mostrar la captura del proyecto si existe; si no, MUST mostrar un placeholder intencional según su plataforma.
 
