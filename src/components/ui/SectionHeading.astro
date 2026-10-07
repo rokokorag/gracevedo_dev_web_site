@@ -7,6 +7,16 @@ interface Props {
 }
 
 const { eyebrow, title, intro, id } = Astro.props;
+
+// `*word*` in a title renders in the serif italic accent font.
+const titleParts = title
+  .split(/(\*[^*]+\*)/)
+  .filter(Boolean)
+  .map((part) =>
+    part.startsWith("*") && part.endsWith("*")
+      ? { text: part.slice(1, -1), serif: true }
+      : { text: part, serif: false },
+  );
 ---
 
 <header class="reveal mb-10 max-w-2xl sm:mb-14">
@@ -20,7 +30,17 @@ const { eyebrow, title, intro, id } = Astro.props;
     id={id}
     class="text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
   >
-    {title}
+    {
+      titleParts.map((part) =>
+        part.serif ? (
+          <em class="font-serif text-[1.12em] font-normal tracking-normal">
+            {part.text}
+          </em>
+        ) : (
+          part.text
+        ),
+      )
+    }
   </h2>
   {intro && <p class="mt-4 text-lg text-pretty text-muted">{intro}</p>}
 </header>

@@ -35,6 +35,15 @@ export default defineConfig({
       subsets: ["latin"],
       fallbacks: ["ui-monospace", "monospace"],
     },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Instrument Serif",
+      cssVariable: "--font-instrument-serif",
+      weights: [400],
+      styles: ["italic"],
+      subsets: ["latin", "latin-ext"],
+      fallbacks: ["ui-serif", "Georgia", "serif"],
+    },
   ],
 
   vite: {

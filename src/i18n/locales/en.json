@@ -39,7 +39,7 @@
   },
   "about": {
     "eyebrow": "About",
-    "title": "Between code and camera.",
+    "title": "Between code and *camera*.",
     "paragraphs": [
       "I'm a Senior Software Engineer based in Mexico City. For more than a decade I've built web, desktop and mobile products, and lately I've focused on fintech: currency exchange, SPEI transfers, debit cards and identity verification.",
       "I've led and coached teams as Tech Lead and Team Coach. I care that code stays maintainable, that reviews add value and that every release reaches production without surprises.",
