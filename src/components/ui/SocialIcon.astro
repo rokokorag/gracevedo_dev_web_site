@@ -1,0 +1,21 @@
+---
+interface Props {
+  // 24x24 SVG path data (Simple Icons format).
+  path: string;
+  size?: number;
+  class?: string;
+}
+
+const { path, size = 18, class: className } = Astro.props;
+---
+
+<svg
+  aria-hidden="true"
+  viewBox="0 0 24 24"
+  width={size}
+  height={size}
+  fill="currentColor"
+  class={className}
+>
+  <path d={path}></path>
+</svg>

@@ -1,7 +1,8 @@
 ---
-import { ArrowUpRight, Mail } from "@lucide/astro";
+import { Mail } from "@lucide/astro";
 import SectionHeading from "../ui/SectionHeading.astro";
-import { site, socials } from "../../data/site";
+import SocialIcon from "../ui/SocialIcon.astro";
+import { activeSocials, site } from "../../data/site";
 import { useTranslations, type Locale } from "../../i18n/utils";
 
 interface Props {
@@ -10,9 +11,6 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const activeSocials = socials.filter((s): s is typeof s & { url: string } =>
-  Boolean(s.url),
-);
 ---
 
 <section
@@ -69,11 +67,15 @@ const activeSocials = socials.filter((s): s is typeof s & { url: string } =>
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1.5 rounded-full border border-border bg-bg/60 px-4 py-2 text-sm transition-colors hover:border-accent/60"
+                    class="group/social inline-flex items-center gap-2 rounded-full border border-border bg-bg/60 px-4 py-2 text-sm transition-colors hover:border-accent/60"
                   >
+                    <SocialIcon
+                      path={social.icon}
+                      size={16}
+                      class="text-muted transition-colors group-hover/social:text-accent"
+                    />
                     {social.label}
                     <span class="sr-only">({t.a11y.newTab})</span>
-                    <ArrowUpRight size={16} class="text-accent" />
                   </a>
                 </li>
               ))}
