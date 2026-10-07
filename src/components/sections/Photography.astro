@@ -44,7 +44,10 @@ const t = useTranslations(lang);
     <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {
         photos.map((photo, i) => (
-          <li class:list={["reveal", i % 2 === 1 && "lg:translate-y-8"]}>
+          <li
+            style={`--reveal-delay: ${i * 110}ms`}
+            class:list={["reveal", i % 2 === 1 && "lg:translate-y-8"]}
+          >
             <ImageSlot
               variant="photo"
               image={photo.image}

@@ -10,19 +10,6 @@
   --color-accent: #ef4444;
   --color-accent-strong: #b91c1c;
   --color-accent-soft: #fca5a5;
-
-  --animate-reveal: reveal linear both;
-
-  @keyframes reveal {
-    from {
-      opacity: 0;
-      transform: translateY(1.5rem);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
 }
 
 @theme inline {
@@ -61,13 +48,51 @@
     scroll-behavior: smooth;
   }
 
-  /* Entrance animation only where scroll-driven animations exist; content stays visible otherwise. */
-  @supports (animation-timeline: view()) {
-    .reveal {
-      animation: var(--animate-reveal);
-      animation-timeline: view();
-      animation-range: entry 0% entry 40%;
+  /*
+   * Entrance animation, played once as each element scrolls into view.
+   * Only hidden when JS is running (`html.js`, set inline in <head>), so content
+   * is always visible without JavaScript or with reduced motion.
+   * Uses `animation` + `transform` so it never overrides an element's own
+   * transitions or translate utilities.
+   */
+  .js .reveal {
+    opacity: 0;
+  }
+
+  .js .reveal.is-visible {
+    animation: reveal-in 0.9s cubic-bezier(0.16, 1, 0.3, 1)
+      var(--reveal-delay, 0ms) both;
+  }
+
+  @keyframes reveal-in {
+    from {
+      opacity: 0;
+      transform: translateY(2rem);
+      filter: blur(6px);
     }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+}
+
+/* Hero glow: slow start when turning on (like a warming filament), gentler fade out. */
+@utility glow-ease {
+  transition-property: opacity, scale;
+  transition-duration: 1.4s;
+  transition-timing-function: ease-out;
+
+  @media (hover: hover) {
+    :where(.group\/hero:hover) & {
+      transition-duration: 1.4s;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }
 

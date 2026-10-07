@@ -30,6 +30,10 @@ const ordered = [...projects].sort(
   />
 
   <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-    {ordered.map((project) => <ProjectCard project={project} lang={lang} />)}
+    {
+      ordered.map((project, i) => (
+        <ProjectCard project={project} lang={lang} index={i} />
+      ))
+    }
   </div>
 </section>

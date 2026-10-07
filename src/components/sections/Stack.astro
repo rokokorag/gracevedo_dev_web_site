@@ -43,10 +43,11 @@ const spans: Record<StackCategoryId, string> = {
 
   <div class="grid gap-4 md:grid-cols-6">
     {
-      stack.map((category) => {
+      stack.map((category, i) => {
         const Icon = icons[category.id];
         return (
           <div
+            style={`--reveal-delay: ${i * 90}ms`}
             class:list={[
               "reveal group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-colors duration-300 hover:border-accent/50",
               spans[category.id],

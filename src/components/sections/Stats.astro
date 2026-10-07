@@ -19,8 +19,11 @@ const t = useTranslations(lang);
     class="mx-auto grid max-w-6xl divide-y divide-border px-4 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-6"
   >
     {
-      stats.map((stat) => (
-        <div class="reveal flex flex-col gap-2 py-8 sm:px-8 sm:first:pl-0 sm:last:pr-0">
+      stats.map((stat, i) => (
+        <div
+          style={`--reveal-delay: ${i * 120}ms`}
+          class="reveal flex flex-col gap-2 py-8 sm:px-8 sm:first:pl-0 sm:last:pr-0"
+        >
           <dt class="order-2 text-sm text-pretty text-muted">
             {t.stats.items[stat.id]}
           </dt>

@@ -8,9 +8,11 @@ import { useTranslations, type Locale } from "../../i18n/utils";
 interface Props {
   project: Project;
   lang: Locale;
+  // Position in the grid, used to cascade the entrance animation.
+  index?: number;
 }
 
-const { project, lang } = Astro.props;
+const { project, lang, index = 0 } = Astro.props;
 const t = useTranslations(lang);
 const copy = t.projects.items[project.id];
 const featured = project.featured ?? false;
@@ -27,6 +29,7 @@ const links = [
 ---
 
 <article
+  style={`--reveal-delay: ${(index % 3) * 110}ms`}
   class:list={[
     "reveal group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors duration-300 hover:border-accent/50",
     featured && "md:col-span-2 md:grid md:grid-cols-2 lg:row-span-2",
