@@ -1,7 +1,10 @@
 // @ts-check
+import { copyFile } from "node:fs/promises";
 import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -49,4 +52,28 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
+  integrations: [
+    sitemap({
+      // Links /  and /es/ as alternates of each other.
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en-US", es: "es-MX" },
+      },
+      filter: (page) => !page.includes("/404"),
+    }),
+    {
+      // Astro only emits the root 404 as `404.html`; hosts look for the nearest
+      // `404.html`, so the Spanish one is copied next to its section.
+      name: "localized-404",
+      hooks: {
+        "astro:build:done": async ({ dir }) => {
+          await copyFile(
+            new URL("es/404/index.html", dir),
+            new URL("es/404.html", dir),
+          );
+        },
+      },
+    },
+  ],
 });

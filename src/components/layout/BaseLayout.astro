@@ -11,11 +11,19 @@ import {
 
 interface Props {
   lang: Locale;
+  // Overrides for pages other than the home page (e.g. 404).
+  title?: string;
+  description?: string;
+  // Keeps the page out of search results and skips canonical/hreflang links.
+  noindex?: boolean;
 }
 
-const { lang } = Astro.props;
+const { lang, noindex = false } = Astro.props;
 const t = useTranslations(lang);
+const title = Astro.props.title ?? t.meta.title;
+const description = Astro.props.description ?? t.meta.description;
 const canonical = absoluteLocaleUrl(lang);
+const ogImage = new URL(`/og/og-${lang}.png`, Astro.site).href;
 ---
 
 <!doctype html>
@@ -25,27 +33,34 @@ const canonical = absoluteLocaleUrl(lang);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#0a0a0b" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <title>{t.meta.title}</title>
-    <meta name="description" content={t.meta.description} />
-    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     {
-      locales.map((l) => (
-        <link rel="alternate" hreflang={l} href={absoluteLocaleUrl(l)} />
-      ))
+      noindex ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <>
+          <link rel="canonical" href={canonical} />
+          {locales.map((l) => (
+            <link rel="alternate" hreflang={l} href={absoluteLocaleUrl(l)} />
+          ))}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={absoluteLocaleUrl(defaultLocale)}
+          />
+        </>
+      )
     }
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={absoluteLocaleUrl(defaultLocale)}
-    />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="gracevedo.dev" />
-    <meta property="og:title" content={t.meta.title} />
-    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={t.meta.ogLocale} />
     {
@@ -58,9 +73,16 @@ const canonical = absoluteLocaleUrl(lang);
           />
         ))
     }
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={t.meta.title} />
-    <meta name="twitter:description" content={t.meta.description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t.meta.ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={t.meta.ogImageAlt} />
 
     <script is:inline>
       // Entrance animations: `.reveal` elements only start hidden once JS runs,

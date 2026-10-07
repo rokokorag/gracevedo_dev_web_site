@@ -2,6 +2,7 @@
   "meta": {
     "title": "Rodrigo Acevedo | Senior Software Engineer",
     "description": "Senior Software Engineer with 12+ years building mobile and web products in fintech. Transactional flows, CI/CD automation and technical leadership.",
+    "ogImageAlt": "Rodrigo Acevedo, Senior Software Engineer: I build software people use every day.",
     "ogLocale": "en_US"
   },
   "a11y": {
@@ -207,6 +208,15 @@
     "text": "Open to senior engineering roles, freelance projects and good conversations. The fastest way to reach me is email.",
     "emailLabel": "Email me",
     "elsewhere": "Elsewhere"
+  },
+  "notFound": {
+    "title": "Page not found | Rodrigo Acevedo",
+    "description": "This page doesn't exist or was moved.",
+    "eyebrow": "Error 404",
+    "heading": "This page is *out of frame*.",
+    "text": "The link may be broken or the page was moved. Let's get you back to something worth looking at.",
+    "home": "Back to home",
+    "contact": "Contact me"
   },
   "footer": {
     "rights": "All rights reserved.",

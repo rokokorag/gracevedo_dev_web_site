@@ -1,0 +1,29 @@
+---
+interface Props {
+  // Text where `*words*` render in the serif italic accent font.
+  text: string;
+}
+
+const { text } = Astro.props;
+
+const parts = text
+  .split(/(\*[^*]+\*)/)
+  .filter(Boolean)
+  .map((part) =>
+    part.startsWith("*") && part.endsWith("*")
+      ? { text: part.slice(1, -1), serif: true }
+      : { text: part, serif: false },
+  );
+---
+
+{
+  parts.map((part) =>
+    part.serif ? (
+      <em class="font-serif text-[1.12em] font-normal tracking-normal">
+        {part.text}
+      </em>
+    ) : (
+      part.text
+    ),
+  )
+}

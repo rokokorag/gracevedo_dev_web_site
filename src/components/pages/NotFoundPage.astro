@@ -1,0 +1,86 @@
+---
+import { ArrowLeft, Mail } from "@lucide/astro";
+import BaseLayout from "../layout/BaseLayout.astro";
+import Footer from "../layout/Footer.astro";
+import Navbar from "../layout/Navbar.astro";
+import SerifText from "../ui/SerifText.astro";
+import { localeUrl, useTranslations, type Locale } from "../../i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const home = localeUrl(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.notFound.title}
+  description={t.notFound.description}
+  noindex
+>
+  <Navbar slot="header" lang={lang} />
+
+  <section class="relative isolate overflow-hidden pt-16">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+      <div
+        class="absolute -top-40 left-1/2 h-[42rem] w-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,--theme(--color-accent-strong/45%),transparent)] blur-3xl"
+      >
+      </div>
+      <div class="absolute inset-0 bg-grain opacity-[0.12] mix-blend-overlay">
+      </div>
+    </div>
+
+    <div
+      class="mx-auto flex min-h-[calc(100svh-4rem)] max-w-3xl flex-col items-center justify-center px-4 py-24 text-center sm:px-6"
+    >
+      <p
+        aria-hidden="true"
+        class="reveal font-serif text-[9rem] leading-none text-fg/90 italic drop-shadow-[0_0_40px_rgb(239_68_68/0.45)] sm:text-[12rem]"
+      >
+        404
+      </p>
+      <p
+        style="--reveal-delay: 100ms"
+        class="reveal mt-6 font-mono text-xs tracking-widest text-accent-soft uppercase"
+      >
+        {t.notFound.eyebrow}
+      </p>
+      <h1
+        style="--reveal-delay: 180ms"
+        class="reveal mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-5xl"
+      >
+        <SerifText text={t.notFound.heading} />
+      </h1>
+      <p
+        style="--reveal-delay: 260ms"
+        class="reveal mt-5 max-w-xl text-lg text-pretty text-muted"
+      >
+        {t.notFound.text}
+      </p>
+      <div
+        style="--reveal-delay: 340ms"
+        class="reveal mt-10 flex flex-wrap justify-center gap-3"
+      >
+        <a
+          href={home}
+          class="inline-flex items-center gap-2 rounded-full bg-accent-strong px-6 py-3 font-medium text-fg shadow-[0_0_40px_-8px] shadow-accent/60 transition-colors hover:bg-red-600"
+        >
+          <ArrowLeft size={18} />
+          {t.notFound.home}
+        </a>
+        <a
+          href={`${home}#contact`}
+          class="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 font-medium text-fg backdrop-blur transition-colors hover:border-accent/60"
+        >
+          <Mail size={18} />
+          {t.notFound.contact}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

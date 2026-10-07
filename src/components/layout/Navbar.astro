@@ -11,12 +11,14 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+// Point at the home page so the links also work from other pages (e.g. 404).
+const home = localeUrl(lang);
 const links = [
-  { href: "#about", label: t.nav.about },
-  { href: "#experience", label: t.nav.experience },
-  { href: "#stack", label: t.nav.stack },
-  { href: "#projects", label: t.nav.projects },
-  { href: "#contact", label: t.nav.contact },
+  { href: `${home}#about`, label: t.nav.about },
+  { href: `${home}#experience`, label: t.nav.experience },
+  { href: `${home}#stack`, label: t.nav.stack },
+  { href: `${home}#projects`, label: t.nav.projects },
+  { href: `${home}#contact`, label: t.nav.contact },
 ];
 ---
 

@@ -59,3 +59,32 @@ Cada versión de idioma SHALL incluir título, meta descripción en su idioma, U
 #### Scenario: Compartir el enlace
 - **WHEN** se inspecciona el `<head>` de `/es`
 - **THEN** contiene título y descripción en español, `og:locale` `es_MX`, y la canónica `https://gracevedo.dev/es/`
+
+#### Scenario: Imagen al compartir
+- **WHEN** se comparte el enlace de cualquier versión de idioma
+- **THEN** la vista previa muestra una imagen de 1200 × 630 en ese idioma (`og:image` y `twitter:image` con `summary_large_image`), con texto alternativo
+
+### Requirement: Favicon e ícono de la marca
+El sitio SHALL mostrar un favicon con la "R" en serif itálica sobre el cuadro rojo, en formato SVG con respaldo ICO, y un ícono táctil de 180 × 180 para la pantalla de inicio de iOS.
+
+#### Scenario: Pestaña del navegador
+- **WHEN** el visitante abre el sitio en cualquier navegador
+- **THEN** la pestaña muestra el favicon de la marca y no el de Astro
+
+### Requirement: Sitemap y robots
+El sitio SHALL publicar un sitemap con las versiones en inglés y español enlazadas como alternativas, y un `robots.txt` que lo referencie. Las páginas 404 MUST quedar fuera del sitemap.
+
+#### Scenario: Sitemap
+- **WHEN** un buscador lee `https://gracevedo.dev/sitemap-index.xml`
+- **THEN** encuentra `/` y `/es/`, cada una con su alternativa en el otro idioma, y ninguna página 404
+
+### Requirement: Página 404
+El sitio SHALL mostrar una página 404 propia en cada idioma, con el estilo del sitio, navegación y enlaces de vuelta al inicio y a contacto. La página MUST marcarse como `noindex`.
+
+#### Scenario: Página inexistente
+- **WHEN** el visitante abre una URL que no existe
+- **THEN** recibe un estado HTTP 404 y la página de error con enlaces al inicio y a contacto
+
+#### Scenario: 404 en español
+- **WHEN** el visitante abre una URL inexistente bajo `/es/` en un hosting que sirve el `404.html` más cercano
+- **THEN** ve la página de error en español
