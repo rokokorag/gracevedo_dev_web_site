@@ -1,4 +1,5 @@
 import type { ImageMetadata } from "astro";
+import portrait from "../assets/portrait/rodrigo.webp";
 
 export const site = {
   name: "Rodrigo Acevedo",
@@ -8,7 +9,7 @@ export const site = {
   // Optional: the "Download CV" button only renders when this is set (e.g. "/cv-rodrigo-acevedo.pdf").
   cvUrl: undefined as string | undefined,
   // Add the portrait in src/assets/, import it and set it here.
-  portrait: undefined as ImageMetadata | undefined,
+  portrait: portrait,
 };
 
 export type SocialId = "linkedin" | "github";
