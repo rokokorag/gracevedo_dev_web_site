@@ -183,7 +183,20 @@
     "title": "The other half of how I see.",
     "text": "When I'm not writing code, I'm behind a camera. My photography portfolio lives on its own site.",
     "cta": "View photography portfolio",
-    "photoAlt": "Photograph by Rodrigo Acevedo"
+    "photos": {
+      "puffin": {
+        "alt": "Close-up of an Atlantic puffin with its bright orange beak, framed by blurred green foliage"
+      },
+      "tokyo-tower": {
+        "alt": "Tokyo Tower lit up in orange against the night sky"
+      },
+      "northern-lights": {
+        "alt": "Green northern lights arching across a starry sky above silhouetted trees"
+      },
+      "ny": {
+        "alt": "Manhattan skyline at sunset with One World Trade Center under a pink and purple sky"
+      }
+    }
   },
   "contact": {
     "eyebrow": "Contact",

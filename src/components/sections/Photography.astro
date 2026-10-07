@@ -48,7 +48,7 @@ const t = useTranslations(lang);
             <ImageSlot
               variant="photo"
               image={photo.image}
-              alt={photo.alt ?? t.photography.photoAlt}
+              alt={t.photography.photos[photo.id].alt}
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
               class="aspect-4/5 rounded-xl border border-border"
             />

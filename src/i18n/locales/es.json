@@ -183,7 +183,20 @@
     "title": "La otra mitad de cómo veo.",
     "text": "Cuando no estoy escribiendo código, estoy detrás de una cámara. Mi portfolio de fotografía vive en su propio sitio.",
     "cta": "Ver portfolio de fotografía",
-    "photoAlt": "Fotografía de Rodrigo Acevedo"
+    "photos": {
+      "puffin": {
+        "alt": "Primer plano de un frailecillo atlántico con su pico naranja, enmarcado por vegetación verde desenfocada"
+      },
+      "tokyo-tower": {
+        "alt": "La Torre de Tokio iluminada en naranja contra el cielo nocturno"
+      },
+      "northern-lights": {
+        "alt": "Aurora boreal verde cruzando un cielo estrellado sobre siluetas de árboles"
+      },
+      "ny": {
+        "alt": "Skyline de Manhattan al atardecer con el One World Trade Center bajo un cielo rosa y morado"
+      }
+    }
   },
   "contact": {
     "eyebrow": "Contacto",
