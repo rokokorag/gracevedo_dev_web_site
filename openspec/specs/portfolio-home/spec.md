@@ -25,7 +25,7 @@ El Hero SHALL mostrar el nombre "Rodrigo Acevedo", el rol de Senior Software Eng
 - **THEN** la página navega a la sección Contact
 
 ### Requirement: Indicadores de impacto
-La sección Stats SHALL mostrar al menos estos indicadores del CV: 12+ años de experiencia, +70% en depósitos de inversión (Vest) y liderazgo de un equipo de 5 ingenieros.
+La sección Stats SHALL mostrar, en este orden, estos indicadores: 12+ años creando software, 3 plataformas (móvil, web y escritorio) y 6 proyectos independientes y freelance.
 
 #### Scenario: Indicadores visibles
 - **WHEN** el visitante llega a la sección Stats
