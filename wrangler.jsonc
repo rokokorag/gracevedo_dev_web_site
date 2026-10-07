@@ -1,0 +1,10 @@
+// Cloudflare Workers config: the site is served as static assets from `dist/`.
+{
+  "name": "gracevedo-dev-web-site",
+  "compatibility_date": "2026-10-06",
+  "assets": {
+    "directory": "./dist",
+    // Serve the nearest 404.html (e.g. dist/es/404.html under /es/) with a 404 status.
+    "not_found_handling": "404-page",
+  },
+}
