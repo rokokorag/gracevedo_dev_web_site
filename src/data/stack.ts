@@ -40,4 +40,18 @@ export const stack: { id: StackCategoryId; items: string[] }[] = [
       "Amazon EC2",
     ],
   },
+  {
+    id: "ai",
+    items: [
+      "Claude Code",
+      "Antigravity",
+      "OpenCode",
+      "Codex",
+      "MCP (Model Context Protocol)",
+      "Agent Skills",
+      "Agent Harness",
+      "Frontier Models (OpenAI, Anthropic, Google)",
+      "Open Weights (DeepSeek, Gemma, Qwen)",
+    ],
+  },
 ];
