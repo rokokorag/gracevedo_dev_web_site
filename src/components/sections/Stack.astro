@@ -1,5 +1,5 @@
 ---
-import { Cloud, CodeXml, Globe, Server, Smartphone } from "@lucide/astro";
+import { Bot, Cloud, CodeXml, Globe, Server, Smartphone } from "@lucide/astro";
 import SectionHeading from "../ui/SectionHeading.astro";
 import { stack, type StackCategoryId } from "../../data/stack";
 import { useTranslations, type Locale } from "../../i18n/utils";
@@ -17,6 +17,7 @@ const icons: Record<StackCategoryId, typeof CodeXml> = {
   web: Globe,
   backend: Server,
   devops: Cloud,
+  ai: Bot,
 };
 
 // Bento layout: wider tiles for the bigger groups.
@@ -26,6 +27,7 @@ const spans: Record<StackCategoryId, string> = {
   web: "md:col-span-3",
   backend: "md:col-span-3",
   devops: "md:col-span-6",
+  ai: "md:col-span-6",
 };
 ---
 
