@@ -1,0 +1,279 @@
+---
+import { Image } from "astro:assets";
+import { site } from "../../data/site";
+import { useTranslations, type Locale } from "../../i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<!--
+  Decorative ID badge hanging from the top of the hero. The markup is the resting
+  state, so it reads fine without JS or with reduced motion; the script below
+  hangs it from the gap between the nav links and the language switcher
+  (`data-lanyard-from` / `data-lanyard-to` in Navbar), swaps the straight strap
+  for a simulated one and lets the badge be dragged.
+-->
+<div
+  data-lanyard
+  aria-hidden="true"
+  class="pointer-events-none absolute top-0 left-[78%] hidden [--rope:clamp(11rem,32svh,17rem)] xl:block"
+>
+  <span
+    data-lanyard-strap
+    class="absolute top-0 left-0 h-(--rope) w-3 -translate-x-1/2 bg-accent-strong"
+  ></span>
+  <svg class="absolute top-0 left-0 size-px overflow-visible" fill="none">
+    <path
+      data-lanyard-path
+      class="stroke-accent-strong"
+      stroke-width="12"
+      stroke-linejoin="round"></path>
+  </svg>
+
+  <div
+    data-lanyard-badge
+    class="pointer-events-auto absolute top-(--rope) left-0 w-52 origin-top -translate-x-1/2 cursor-grab touch-none select-none active:cursor-grabbing"
+  >
+    <span
+      class="mx-auto block h-7 w-5 rounded-b-md border border-t-0 border-muted/50 bg-surface-2"
+    ></span>
+    <div
+      class="-mt-2 rounded-2xl border border-border bg-surface p-4 shadow-2xl shadow-black/60"
+    >
+      <span class="mx-auto mb-4 block h-1.5 w-10 rounded-full bg-bg"></span>
+      {
+        site.portrait && (
+          <Image
+            src={site.portrait}
+            alt=""
+            width={352}
+            height={352}
+            draggable="false"
+            class="aspect-square w-full rounded-xl border border-border object-cover"
+          />
+        )
+      }
+      <p class="mt-4 font-serif text-2xl leading-none text-fg italic">
+        {site.name}
+      </p>
+      <p
+        class="mt-2 font-mono text-[0.6875rem] leading-snug text-balance text-muted"
+      >
+        {t.hero.eyebrow}
+      </p>
+      <div
+        class="mt-4 flex items-center justify-between border-t border-border pt-3"
+      >
+        <span
+          class="grid size-7 place-items-center rounded-md bg-accent-strong font-mono text-[0.625rem] font-semibold text-fg"
+          >{site.monogram}</span
+        >
+        <span class="h-5 w-20 bg-barcode opacity-40"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Verlet rope: a chain of points hanging from the anchor, ending in a heavier
+  // two-point body (clip + center of mass) that gives the badge its own swing.
+  const SEGMENTS = 12;
+  const GRAVITY = 2600;
+  const DAMPING = 0.99;
+  const STEP = 1 / 120;
+  const ITERATIONS = 14;
+  const BADGE_MASS = 10;
+  // Seconds the anchor takes to lower the lanyard into view on load.
+  const LOWER_TIME = 1.1;
+
+  interface Point {
+    x: number;
+    y: number;
+    px: number;
+    py: number;
+  }
+
+  // Hang it midway between the last nav link and the language switcher.
+  function place(root: HTMLElement) {
+    const from = document.querySelector("[data-lanyard-from]");
+    const to = document.querySelector("[data-lanyard-to]");
+    const host = root.offsetParent;
+    if (!from || !to || !host) return;
+    const start = from.getBoundingClientRect().right;
+    const end = to.getBoundingClientRect().left;
+    if (end <= start) return;
+    const x = (start + end) / 2 - host.getBoundingClientRect().left;
+    root.style.left = `${x.toFixed(1)}px`;
+  }
+
+  function setup(root: HTMLElement) {
+    const strap = root.querySelector<HTMLElement>("[data-lanyard-strap]");
+    const path = root.querySelector<SVGPathElement>("[data-lanyard-path]");
+    const badge = root.querySelector<HTMLElement>("[data-lanyard-badge]");
+    if (!strap || !path || !badge) return true;
+
+    let rope = strap.offsetHeight;
+    if (!rope) return false; // hidden at this breakpoint
+
+    const arm = badge.offsetHeight / 2;
+    let segment = rope / SEGMENTS;
+
+    // Start hanging straight, fully above the top edge and off to one side; the
+    // anchor then lowers it into place, which is what sets it swinging.
+    const startX = 70;
+    const startY = -(rope + arm * 2 + 24);
+    const points: Point[] = Array.from({ length: SEGMENTS + 2 }, (_, i) => {
+      const y = startY + (i <= SEGMENTS ? i * segment : rope + arm);
+      return { x: startX, y, px: startX, py: y };
+    });
+    const anchor = points[0];
+    const clip = points[SEGMENTS];
+    const body = points[SEGMENTS + 1];
+
+    let lowered = 0;
+    let drag: { dx: number; dy: number; x: number; y: number } | null = null;
+    let frame = 0;
+    let last = 0;
+    let carry = 0;
+    let still = 0;
+
+    function link(a: Point, b: Point, length: number, rigid: boolean) {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const dist = Math.hypot(dx, dy) || 0.001;
+      // The strap only resists stretching; it can go slack.
+      if (!rigid && dist <= length) return;
+      const wa = a === anchor ? 0 : a === body ? 1 / BADGE_MASS : 1;
+      const wb = drag && b === body ? 0 : b === body ? 1 / BADGE_MASS : 1;
+      if (wa + wb === 0) return;
+      const diff = (dist - length) / dist / (wa + wb);
+      a.x += dx * diff * wa;
+      a.y += dy * diff * wa;
+      b.x -= dx * diff * wb;
+      b.y -= dy * diff * wb;
+    }
+
+    function step() {
+      if (lowered < LOWER_TIME) {
+        lowered += STEP;
+        const left = (1 - Math.min(lowered / LOWER_TIME, 1)) ** 3;
+        anchor.x = startX * left;
+        anchor.y = startY * left;
+      }
+      for (let i = 1; i < points.length; i++) {
+        const p = points[i];
+        const vx = (p.x - p.px) * DAMPING;
+        const vy = (p.y - p.py) * DAMPING;
+        p.px = p.x;
+        p.py = p.y;
+        p.x += vx;
+        p.y += vy + GRAVITY * STEP * STEP;
+      }
+      if (drag) {
+        // Keep the grabbed badge within reach of the strap.
+        const reach = rope + arm;
+        const dist = Math.hypot(drag.x, drag.y);
+        const scale = dist > reach ? reach / dist : 1;
+        body.x = drag.x * scale;
+        body.y = drag.y * scale;
+      }
+      for (let n = 0; n < ITERATIONS; n++) {
+        for (let i = 0; i < SEGMENTS; i++) {
+          link(points[i], points[i + 1], segment, false);
+        }
+        link(clip, body, arm, true);
+      }
+    }
+
+    function render() {
+      let d = `M${anchor.x.toFixed(1)} ${anchor.y.toFixed(1)}`;
+      for (let i = 1; i < SEGMENTS; i++) {
+        const p = points[i];
+        const next = points[i + 1];
+        d += `Q${p.x.toFixed(1)} ${p.y.toFixed(1)} ${((p.x + next.x) / 2).toFixed(1)} ${((p.y + next.y) / 2).toFixed(1)}`;
+      }
+      d += `L${clip.x.toFixed(1)} ${clip.y.toFixed(1)}`;
+      path!.setAttribute("d", d);
+      const angle = Math.atan2(body.y - clip.y, body.x - clip.x) - Math.PI / 2;
+      badge!.style.transform = `translate(${clip.x.toFixed(1)}px, ${(clip.y - rope).toFixed(1)}px) rotate(${angle.toFixed(4)}rad)`;
+    }
+
+    function tick(now: number) {
+      carry += Math.min((now - last) / 1000, 0.05);
+      last = now;
+      const beforeX = body.x;
+      const beforeY = body.y;
+      while (carry >= STEP) {
+        step();
+        carry -= STEP;
+      }
+      render();
+      // Stop the loop once it has settled; any interaction wakes it up again.
+      const moved = Math.abs(body.x - beforeX) + Math.abs(body.y - beforeY);
+      still = !drag && moved < 0.02 ? still + 1 : 0;
+      frame = still > 90 ? 0 : requestAnimationFrame(tick);
+    }
+
+    function wake() {
+      still = 0;
+      if (frame) return;
+      last = performance.now();
+      frame = requestAnimationFrame(tick);
+    }
+
+    function pointer(event: PointerEvent) {
+      const origin = root.getBoundingClientRect();
+      return { x: event.clientX - origin.left, y: event.clientY - origin.top };
+    }
+
+    badge.addEventListener("pointerdown", (event) => {
+      const at = pointer(event);
+      drag = { dx: body.x - at.x, dy: body.y - at.y, x: body.x, y: body.y };
+      badge.setPointerCapture(event.pointerId);
+      wake();
+    });
+    badge.addEventListener("pointermove", (event) => {
+      if (!drag) return;
+      const at = pointer(event);
+      drag.x = at.x + drag.dx;
+      drag.y = at.y + drag.dy;
+    });
+    const release = () => (drag = null);
+    badge.addEventListener("pointerup", release);
+    badge.addEventListener("pointercancel", release);
+
+    window.addEventListener("resize", () => {
+      const length = parseFloat(getComputedStyle(badge).top);
+      if (!root.offsetParent || !length) return;
+      rope = length;
+      segment = rope / SEGMENTS;
+      wake();
+    });
+
+    strap.hidden = true;
+    root.dataset.ready = "";
+    wake();
+    return true;
+  }
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  document.querySelectorAll<HTMLElement>("[data-lanyard]").forEach((root) => {
+    place(root);
+    window.addEventListener("resize", () => place(root));
+  });
+  if (!reducedMotion.matches) {
+    document.querySelectorAll<HTMLElement>("[data-lanyard]").forEach((root) => {
+      if (setup(root)) return;
+      // Hidden on narrow screens: set it up if the window grows enough to show it.
+      const retry = () => {
+        if (setup(root)) window.removeEventListener("resize", retry);
+      };
+      window.addEventListener("resize", retry);
+    });
+  }
+</script>

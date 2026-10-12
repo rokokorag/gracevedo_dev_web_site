@@ -65,6 +65,11 @@
       var(--reveal-delay, 0ms) both;
   }
 
+  /* The hero lanyard stays out of sight until its script has lifted it above the top edge. */
+  .js [data-lanyard]:not([data-ready]) {
+    visibility: hidden;
+  }
+
   @keyframes reveal-in {
     from {
       opacity: 0;
@@ -99,6 +104,18 @@
 
 @utility bg-grain {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+@utility bg-barcode {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-fg) 0 1px,
+    transparent 1px 3px,
+    var(--color-fg) 3px 5px,
+    transparent 5px 6px,
+    var(--color-fg) 6px 7px,
+    transparent 7px 10px
+  );
 }
 
 @utility text-gradient-accent {

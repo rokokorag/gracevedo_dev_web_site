@@ -43,7 +43,7 @@ const links = [
       <span class="sr-only">— {t.a11y.home}</span>
     </a>
 
-    <ul class="hidden items-center gap-1 text-sm md:flex">
+    <ul data-lanyard-from class="hidden items-center gap-1 text-sm md:flex">
       {
         links.map((link) => (
           <li>
@@ -58,7 +58,7 @@ const links = [
       }
     </ul>
 
-    <div class="flex items-center gap-3">
+    <div data-lanyard-to class="flex items-center gap-3">
       <LanguageSwitcher lang={lang} />
       <button
         type="button"

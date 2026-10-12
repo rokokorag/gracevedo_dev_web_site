@@ -1,5 +1,6 @@
 ---
 import { ArrowDown, ArrowRight, Download, MapPin } from "@lucide/astro";
+import Lanyard from "../ui/Lanyard.astro";
 import SocialIcon from "../ui/SocialIcon.astro";
 import { activeSocials, site } from "../../data/site";
 import { useTranslations, type Locale } from "../../i18n/utils";
@@ -28,10 +29,6 @@ const heroSocials = activeSocials.filter(
       class="absolute -top-28 left-1/2 h-[30rem] w-[44rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,--theme(--color-accent/85%),transparent)] opacity-0 blur-3xl glow-ease group-hover/hero:opacity-100"
     >
     </div>
-    <div
-      class="absolute inset-0 bg-[linear-gradient(to_right,--theme(--color-border/35%)_1px,transparent_1px),linear-gradient(to_bottom,--theme(--color-border/35%)_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_55%_at_50%_35%,black,transparent)] bg-size-[4rem_4rem]"
-    >
-    </div>
     <div class="absolute inset-0 bg-grain opacity-[0.12] mix-blend-overlay">
     </div>
   </div>
@@ -53,10 +50,11 @@ const heroSocials = activeSocials.filter(
 
     <h1
       style="--reveal-delay: 120ms"
-      class="reveal max-w-4xl text-5xl leading-[1.05] font-semibold tracking-tighter text-balance sm:text-6xl lg:text-7xl"
+      class="reveal max-w-4xl text-5xl leading-[1.05] font-semibold tracking-tighter text-balance sm:text-6xl lg:text-7xl xl:max-w-176"
     >
+      <!-- On wide screens the lanyard badge shows the name, so it stays here only for assistive tech. -->
       <span
-        class="block font-serif text-[1.12em] font-normal tracking-normal text-fg italic"
+        class="block font-serif text-[1.12em] font-normal tracking-normal text-fg italic xl:sr-only"
         >{site.name}.</span
       >
       <span class="block text-gradient-accent">{t.hero.headline}</span>
@@ -130,4 +128,6 @@ const heroSocials = activeSocials.filter(
       }
     </div>
   </div>
+
+  <Lanyard lang={lang} />
 </section>
