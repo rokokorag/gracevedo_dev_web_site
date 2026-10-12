@@ -38,7 +38,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 **Inline text conventions in locale strings:**
 
 - `*word*` renders in the serif italic accent font (`components/ui/SerifText.astro`), used in section titles and the 404 heading.
-- `[Label](project-id)` inside an experience highlight links to that project's `url` from `src/data/projects.ts` (parsed in `sections/Experience.astro`).
+- `[Label](project-id)` inside an experience highlight links to that project's `url` from `src/data/projects.ts` (parsed in `sections/Experience.astro`). `[Label](project-id:play-store)` and `[Label](project-id:app-store)` link to its `playStoreUrl` / `appStoreUrl` instead.
 
 **Images.** Put them in `src/assets/` and import them from `src/data/`, so `astro:assets` optimizes them. Don't put them in `public/`. `public/` is for favicons, OG images and `robots.txt`.
 

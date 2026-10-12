@@ -24,6 +24,10 @@ const links = [
     href: project.playStoreUrl,
     label: t.projects.getOnPlay,
   },
+  project.appStoreUrl && {
+    href: project.appStoreUrl,
+    label: t.projects.getOnAppStore,
+  },
   project.url && { href: project.url, label: t.projects.visitSite },
 ].filter((l): l is { href: string; label: string } => Boolean(l));
 ---

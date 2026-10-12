@@ -16,10 +16,19 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 // Highlights may link to a project with `[label](project-id)`; the URL comes from src/data/projects.ts.
+// `[label](project-id:play-store)` and `[label](project-id:app-store)` link to its store listings instead.
+function projectHref(target: string) {
+  const [id, store] = target.split(":");
+  const project = projects.find((p) => p.id === id);
+  if (store === "play-store") return project?.playStoreUrl;
+  if (store === "app-store") return project?.appStoreUrl;
+  return store ? undefined : project?.url;
+}
+
 function parseHighlight(text: string) {
   return text.split(/(\[[^\]]+\]\([^)]+\))/).map((part) => {
     const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-    const href = match && projects.find((p) => p.id === match[2])?.url;
+    const href = match && projectHref(match[2]);
     return href ? { label: match[1], href } : { text: match?.[1] ?? part };
   });
 }

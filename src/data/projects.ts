@@ -12,6 +12,7 @@ export interface Project {
   upcomingPlatforms?: Platform[];
   url?: string;
   playStoreUrl?: string;
+  appStoreUrl?: string;
   // A finished mockup image (16:9), shown as is.
   image?: ImageMetadata;
   // A raw app screenshot from src/assets/projects/, shown inside a phone frame.
@@ -26,11 +27,11 @@ export const projects: Project[] = [
   {
     id: "slabs",
     screenshot: slabsImg,
-    platforms: ["android"],
-    upcomingPlatforms: ["ios"],
+    platforms: ["android", "ios"],
     url: "https://slabs.gracevedo.dev/",
     playStoreUrl:
       "https://play.google.com/store/apps/details?id=dev.gracevedo.slabs",
+    appStoreUrl: "https://apps.apple.com/app/slabs-sliding-puzzle/id6818035960",
     tags: ["Flutter", "BLoC"],
     featured: true,
   },

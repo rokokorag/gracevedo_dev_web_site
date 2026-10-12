@@ -75,7 +75,7 @@
       "independent-engineer": {
         "title": "Independent Software Engineer",
         "highlights": [
-          "Diseñé y construí [Slabs: Sliding Puzzle](slabs) de principio a fin con Flutter y arquitectura BLoC. Publicado en Google Play, con el lanzamiento en App Store muy pronto.",
+          "Diseñé y construí [Slabs: Sliding Puzzle](slabs) de principio a fin con Flutter y arquitectura BLoC. Publicado en [Google Play](slabs:play-store) y en la [App Store](slabs:app-store).",
           "Construí sitios web para clientes: [Smile Too](smiletoo) (clínica dental), [Raíz Intelligence Lab](raiz-intelligence-lab) (consultora de investigación) y [RehabSport](rehabsportmed) (medicina deportiva)."
         ]
       },
@@ -145,6 +145,7 @@
     "comingSoon": "próximamente",
     "visitSite": "Visitar sitio",
     "getOnPlay": "Google Play",
+    "getOnAppStore": "App Store",
     "platforms": {
       "web": "Sitio web",
       "android": "App Android",
