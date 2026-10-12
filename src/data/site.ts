@@ -1,6 +1,7 @@
 import type { ImageMetadata } from "astro";
 import { siBehance, siGithub, siInstagram, siX } from "simple-icons";
 import portrait from "../assets/portrait/rodrigo.webp";
+import badgePortrait from "../assets/portrait/rodrigo-badge.webp";
 
 export const site = {
   name: "Rodrigo Acevedo",
@@ -11,6 +12,8 @@ export const site = {
   cvUrl: undefined as string | undefined,
   // Add the portrait in src/assets/, import it and set it here.
   portrait: portrait,
+  // Photo on the hero lanyard badge; cropped to fill its slot, so keep the face centered.
+  badgePortrait: badgePortrait,
 };
 
 export type SocialId = "github" | "linkedin" | "x" | "instagram" | "behance";
