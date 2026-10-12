@@ -18,7 +18,11 @@ const heroSocials = activeSocials.filter(
 );
 ---
 
-<section id="top" class="group/hero relative isolate overflow-hidden pt-16">
+<!-- `--lanyard-*` size the hanging badge (ui/Lanyard) and, below xl, push the copy under it. -->
+<section
+  id="top"
+  class="group/hero relative isolate overflow-hidden pt-16 [--lanyard-badge:22rem] [--lanyard-rope:6.5rem] xl:[--lanyard-badge:27rem] xl:[--lanyard-rope:clamp(10rem,30svh,16rem)]"
+>
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
     <!-- Glow "warms up" like a light bulb while the pointer is over the hero. -->
     <div
@@ -34,29 +38,16 @@ const heroSocials = activeSocials.filter(
   </div>
 
   <div
-    class="mx-auto flex min-h-[min(calc(100svh-4rem),56rem)] max-w-6xl flex-col justify-center px-4 py-20 sm:px-6"
+    class="mx-auto flex min-h-[min(calc(100svh-4rem),56rem)] max-w-6xl flex-col px-4 pt-[calc(var(--lanyard-rope)+var(--lanyard-badge)-1.5rem)] pb-16 sm:px-6 xl:justify-center xl:py-20"
   >
-    <p
-      class="reveal mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1 font-mono text-xs text-muted backdrop-blur"
-    >
-      <span aria-hidden="true" class="relative flex size-2">
-        <span
-          class="absolute inline-flex size-full rounded-full bg-accent opacity-75 motion-safe:animate-ping"
-        ></span>
-        <span class="relative inline-flex size-2 rounded-full bg-accent"></span>
-      </span>
-      {t.hero.eyebrow}
-    </p>
+    <!-- The role and the name are shown on the lanyard badge, which is decorative, so they stay here for assistive tech. -->
+    <p class="sr-only">{t.hero.eyebrow}</p>
 
     <h1
       style="--reveal-delay: 120ms"
       class="reveal max-w-4xl text-5xl leading-[1.05] font-semibold tracking-tighter text-balance sm:text-6xl lg:text-7xl xl:max-w-176"
     >
-      <!-- On wide screens the lanyard badge shows the name, so it stays here only for assistive tech. -->
-      <span
-        class="block font-serif text-[1.12em] font-normal tracking-normal text-fg italic xl:sr-only"
-        >{site.name}.</span
-      >
+      <span class="sr-only">{site.name}.</span>
       <span class="block text-gradient-accent">{t.hero.headline}</span>
     </h1>
 

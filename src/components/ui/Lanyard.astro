@@ -13,19 +13,23 @@ const t = useTranslations(lang);
 
 <!--
   Decorative ID badge hanging from the top of the hero. The markup is the resting
-  state, so it reads fine without JS or with reduced motion; the script below
-  hangs it from the gap between the nav links and the language switcher
-  (`data-lanyard-from` / `data-lanyard-to` in Navbar), swaps the straight strap
-  for a simulated one and lets the badge be dragged.
+  state, so it reads fine without JS or with reduced motion. It hangs centered
+  on narrow screens; on wide ones the script moves it to the gap between the nav
+  links and the language switcher (`data-lanyard-from` / `data-lanyard-to` in
+  Navbar). The script also swaps the straight strap for a simulated one and lets
+  the badge be dragged.
+
+  Its size comes from `--lanyard-rope` and `--lanyard-badge`, set on the hero
+  section, which also uses them to keep its copy clear of the badge.
 -->
 <div
   data-lanyard
   aria-hidden="true"
-  class="pointer-events-none absolute top-0 left-[78%] hidden [--rope:clamp(11rem,32svh,17rem)] xl:block"
+  class="pointer-events-none absolute top-0 left-1/2 xl:left-[78%]"
 >
   <span
     data-lanyard-strap
-    class="absolute top-0 left-0 h-(--rope) w-3 -translate-x-1/2 bg-accent-strong"
+    class="absolute top-0 left-0 h-(--lanyard-rope) w-3 -translate-x-1/2 bg-accent-strong"
   ></span>
   <svg class="absolute top-0 left-0 size-px overflow-visible" fill="none">
     <path
@@ -37,28 +41,31 @@ const t = useTranslations(lang);
 
   <div
     data-lanyard-badge
-    class="pointer-events-auto absolute top-(--rope) left-0 w-52 origin-top -translate-x-1/2 cursor-grab touch-none select-none active:cursor-grabbing"
+    class="pointer-events-auto absolute top-(--lanyard-rope) left-0 flex h-(--lanyard-badge) w-48 origin-top -translate-x-1/2 cursor-grab touch-pan-y flex-col select-none active:cursor-grabbing xl:w-60"
   >
     <span
-      class="mx-auto block h-7 w-5 rounded-b-md border border-t-0 border-muted/50 bg-surface-2"
+      class="mx-auto block h-7 w-5 shrink-0 rounded-b-md border border-t-0 border-muted/50 bg-surface-2"
     ></span>
     <div
-      class="-mt-2 rounded-2xl border border-border bg-surface p-4 shadow-2xl shadow-black/60"
+      class="-mt-2 flex min-h-0 flex-1 flex-col rounded-2xl border border-border bg-surface p-4 shadow-2xl shadow-black/60"
     >
-      <span class="mx-auto mb-4 block h-1.5 w-10 rounded-full bg-bg"></span>
+      <span class="mx-auto mb-4 block h-1.5 w-10 shrink-0 rounded-full bg-bg"
+      ></span>
       {
         site.portrait && (
           <Image
             src={site.portrait}
             alt=""
-            width={352}
-            height={352}
+            width={416}
+            height={416}
             draggable="false"
-            class="aspect-square w-full rounded-xl border border-border object-cover"
+            class="min-h-0 w-full flex-1 rounded-xl border border-border object-cover"
           />
         )
       }
-      <p class="mt-4 font-serif text-2xl leading-none text-fg italic">
+      <p
+        class="mt-4 text-2xl leading-none font-bold tracking-tight text-fg xl:text-3xl xl:leading-none"
+      >
         {site.name}
       </p>
       <p
@@ -98,8 +105,13 @@ const t = useTranslations(lang);
     py: number;
   }
 
-  // Hang it midway between the last nav link and the language switcher.
+  // On wide screens, hang it midway between the last nav link and the language
+  // switcher; otherwise leave it where the CSS centers it.
+  const wide = window.matchMedia("(min-width: 80rem)");
+
   function place(root: HTMLElement) {
+    root.style.left = "";
+    if (!wide.matches) return;
     const from = document.querySelector("[data-lanyard-from]");
     const to = document.querySelector("[data-lanyard-to]");
     const host = root.offsetParent;
@@ -115,12 +127,10 @@ const t = useTranslations(lang);
     const strap = root.querySelector<HTMLElement>("[data-lanyard-strap]");
     const path = root.querySelector<SVGPathElement>("[data-lanyard-path]");
     const badge = root.querySelector<HTMLElement>("[data-lanyard-badge]");
-    if (!strap || !path || !badge) return true;
+    if (!strap || !path || !badge) return;
 
     let rope = strap.offsetHeight;
-    if (!rope) return false; // hidden at this breakpoint
-
-    const arm = badge.offsetHeight / 2;
+    let arm = badge.offsetHeight / 2;
     let segment = rope / SEGMENTS;
 
     // Start hanging straight, fully above the top edge and off to one side; the
@@ -248,9 +258,8 @@ const t = useTranslations(lang);
     badge.addEventListener("pointercancel", release);
 
     window.addEventListener("resize", () => {
-      const length = parseFloat(getComputedStyle(badge).top);
-      if (!root.offsetParent || !length) return;
-      rope = length;
+      rope = parseFloat(getComputedStyle(badge).top) || rope;
+      arm = badge.offsetHeight / 2;
       segment = rope / SEGMENTS;
       wake();
     });
@@ -258,7 +267,6 @@ const t = useTranslations(lang);
     strap.hidden = true;
     root.dataset.ready = "";
     wake();
-    return true;
   }
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -267,13 +275,6 @@ const t = useTranslations(lang);
     window.addEventListener("resize", () => place(root));
   });
   if (!reducedMotion.matches) {
-    document.querySelectorAll<HTMLElement>("[data-lanyard]").forEach((root) => {
-      if (setup(root)) return;
-      // Hidden on narrow screens: set it up if the window grows enough to show it.
-      const retry = () => {
-        if (setup(root)) window.removeEventListener("resize", retry);
-      };
-      window.addEventListener("resize", retry);
-    });
+    document.querySelectorAll<HTMLElement>("[data-lanyard]").forEach(setup);
   }
 </script>
